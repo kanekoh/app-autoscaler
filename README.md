@@ -92,6 +92,7 @@ npm install
 npm test
 popd
 
+source .envrc
 go install github.com/onsi/ginkgo/ginkgo
 export DBURL=postgres://postgres@localhost/autoscaler?sslmode=disable
 pushd src/autoscaler
@@ -109,10 +110,15 @@ pushd api
 npm install
 popd
 
+pushd servicebroker
+npm install
+popd
+
 pushd scheduler
 mvn package -DskipTests
 popd
 
+source .envrc
 go install github.com/onsi/ginkgo/ginkgo
 export DBURL=postgres://postgres@localhost/autoscaler?sslmode=disable
 ginkgo -r -race -p -randomizeAllSpecs src/integration
